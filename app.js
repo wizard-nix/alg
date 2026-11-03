@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderTopicList() {
+        document.body.classList.remove('topic-view');
         calculateTotalSolved();
         mainContent.innerHTML = '';
 
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderTopic(topic) {
+        document.body.classList.add('topic-view');
         window.scrollTo(0, 0);
         mainContent.innerHTML = '';
 

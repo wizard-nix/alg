@@ -1,20 +1,93 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Тренажер по Алгебре</title>
+
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Theme color (браузерная адресная строка) -->
+    <meta name="theme-color" content="#ff8c42">
+
+    <!-- iOS / Safari PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Алгебра">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Open Graph / Telegram preview -->
+    <meta property="og:title" content="Тренажёр по Алгебре">
+    <meta property="og:description" content="Интерактивный тренажёр по алгебре — подготовка к ОГЭ">
+    <meta property="og:image" content="icons/icon-512.png">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.9/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.9/dist/katex.min.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.9/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"></script>
+
+    <!-- Service Worker registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .catch((err) => console.warn('SW registration failed:', err));
+            });
+        }
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=113926132', 'ym');
+
+        ym(113926132, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/113926132" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
+
 <body>
     <div id="app">
         <header>
-            <h1>Алгебра 📐</h1>
-            <div id="progress-container">
-                🔥 <span id="total-solved">0</span>
+            <div class="header-main">
+                <h1>Алгебра 📐</h1>
+                <div id="progress-container">
+                    🔥 <span id="total-solved">0</span>
+                </div>
+            </div>
+            <div class="header-oge-banner">
+                <div class="oge-info">
+                    <span class="oge-badge">ОГЭ</span>
+                    <span class="oge-text">Записаться на подготовку ОГЭ математика</span>
+                </div>
+                <div class="oge-actions">
+                    <a href="https://max.ru/u/f9LHodD0cOIGBlKlHSwRxUB6BRl96bS_g3jKeZtSg8tjSPmilfZjl52lFFQ"
+                        target="_blank" rel="noopener" class="oge-btn oge-btn-max" title="Записаться через MAX">
+                        <svg class="oge-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path
+                                d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2 22l5.178-1.306A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm-3.5 6.5h2l1.5 3 1.5-3h2v7h-1.8v-3.8L12.4 14h-.8l-1.3-2.3V15.5h-1.8v-7z" />
+                        </svg>
+                        <!-- <span>MAX</span> -->
+                    </a>
+                    <a href="https://t.me/wizard_nix" target="_blank" rel="noopener" class="oge-btn oge-btn-tg"
+                        title="Записаться через Telegram">
+                        <svg class="oge-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path
+                                d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.313 4.673c.46 0 .663-.211.921-.46l2.211-2.15 4.6 3.398c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.417z" />
+                        </svg>
+                        <!-- <span>Tg</span> -->
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -24,4 +97,5 @@
     <script src="data.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
